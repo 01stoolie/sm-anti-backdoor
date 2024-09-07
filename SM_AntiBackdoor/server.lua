@@ -57,15 +57,15 @@ local function checkFileModifications()
                 local fileContent = LoadResourceFile(resourceName, fileName) or ""
                 if detectBackdoor(fileContent) then
                     table.insert(detectedBackdoors, {resource = resourceName, file = fileName})
-                    log("warn", "Modification non autorisée détectée dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                    log("warn", "Unauthorized modification detected in resource: ".. resourceName.." file: ".. fileName)
                     if config.notifyAdmins then
-                        notifyAdmins("Modification non autorisée détectée dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                       notifyAdmins("Unauthorized modification detected in resource: ".. resourceName.." file: ".. fileName)
                     end
                     if config.notifyByEmail then
-                        sendEmailNotification("Modification non autorisée détectée", "Une modification non autorisée a été détectée dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                        sendEmailNotification("Unauthorized modification detected", "An unauthorized modification was detected in resource: ".. resourceName.." file: ".. fileName)
                     end
                     if config.notifyByWebhook then
-                        sendWebhookNotification("Modification non autorisée détectée", "Une modification non autorisée a été détectée dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                        sendWebhookNotification("Unauthorized modification detected", "An unauthorized modification was detected in resource: ".. resourceName.." file: ".. fileName)
                     end
                     if config.autoRemoveBackdoors then
                         RemoveResourceFile(resourceName, fileName)
@@ -95,13 +95,13 @@ local function scanResources()
                     table.insert(detectedBackdoors, {resource = resourceName, file = fileName})
                     log("warn", "Backdoor détecté dans la ressource: " .. resourceName .. " fichier: " .. fileName)
                     if config.notifyAdmins then
-                        notifyAdmins("Backdoor détecté dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                       notifyAdmins("Unauthorized modification detected in resource: ".. resourceName.." file: ".. fileName)
                     end
                     if config.notifyByEmail then
-                        sendEmailNotification("Backdoor détecté", "Un backdoor a été détecté dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                        sendEmailNotification("Unauthorized modification detected", "An unauthorized modification was detected in resource: ".. resourceName.." file: ".. fileName)
                     end
                     if config.notifyByWebhook then
-                        sendWebhookNotification("Backdoor détecté", "Un backdoor a été détecté dans la ressource: " .. resourceName .. " fichier: " .. fileName)
+                        sendWebhookNotification("Unauthorized modification detected", "An unauthorized modification was detected in resource: ".. resourceName.." file: ".. fileName)
                     end
                     if config.autoRemoveBackdoors then
                         RemoveResourceFile(resourceName, fileName)
@@ -175,7 +175,7 @@ local function notifyAdmins(message)
                 end
             elseif string.find(identifier, "license:") then
                 local license = string.sub(identifier, 9)
-                log("info", "Notification envoyée à l'utilisateur avec la license: " .. license)
+               log("info", "Notification sent to user with license: " .. license)
             end
         end
     end
@@ -185,7 +185,7 @@ local function sendEmailNotification(subject, body)
     for _, user in ipairs(config.users) do
         if user.email then
             
-            print("Envoi de l'email à " .. user.email .. " : " .. subject .. " - " .. body)
+       print("Sending email to " .. user.email .. " : " .. subject .. " - " .. body)
             
             
             
