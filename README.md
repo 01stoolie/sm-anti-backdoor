@@ -1,0 +1,1 @@
+Simple but useful anti backdoor script for your FiveM server, all you have to do is just to put this file in the resources section of your server it will check all your resources to see if there is a backdoor if there is a backdoor you will be notified from the type of notification you would like to use and the file containing the backdoor will be blocked.
